@@ -1,0 +1,69 @@
+# ===================================================================
+# PROJECT STRUCTURE — the two "sides" of your app
+# ===================================================================
+
+Backend:
+  URL: https://dummyjson.com # Base address for every API call
+  Language: N/A # Hosted third-party mock REST API (dummyjson.com)
+  Framework: N/A
+
+Frontend:
+  URL: https://online-shop.com # Base address for every page a user visits
+  Language: TypeScript # The language React is written in
+  Framework: React # Handles what the user sees and clicks
+
+# ===================================================================
+# ROUTES — each entry = ONE user goal, mapped to TWO routes:
+#
+#   frontend → the PAGE the browser shows (always "GET", because
+#              loading a page is just "reading" that page)
+#   backend  → the API ENDPOINT that page actually talks to
+#              (the method here changes based on the real action)
+# ===================================================================
+
+Routes:
+  # 1. READ (list) ---------------------------------------------------
+  - user_goal: "View all recipes"
+    frontend:
+      path: /recipes
+      method: GET # Load RecipeIndex.tsx
+    backend:
+      path: /recipes
+      method: GET # Fetch every recipe from the API
+
+  # 2. READ (single) --------------------------------------------------
+  - user_goal: "View one recipe"
+    frontend:
+      path: /recipes/{id}
+      method: GET # Load RecipeShow.tsx for one recipe's details
+    backend:
+      path: /recipes/{id}
+      method: GET # Fetch that specific recipe by its ID
+
+  # 3. CREATE ----------------------------------------------------------
+  - user_goal: "Create a new recipe"
+    frontend:
+      path: /recipes/create
+      method: GET # Load RecipeCreate.tsx with an empty form
+    backend:
+      path: /recipes/add
+      method: POST # Submit the form → save a brand-new recipe
+
+  # 4. UPDATE ------------------------------------------------------------
+  - user_goal: "Edit an existing recipe"
+    frontend:
+      path: /recipes/{id}/edit
+      method: GET # Load RecipeEdit.tsx, pre-filled with existing data
+    backend:
+      path: /recipes/{id}
+      method: PUT # Submit changes → update that one recipe
+
+  # 5. DELETE --------------------------------------------------------------
+  - user_goal: "Delete a recipe"
+    frontend:
+      path: /recipes/{id} or /recipes
+      method: GET # Delete is triggered from RecipeShow.tsx or RecipeIndex.tsx
+      # via a "Delete" button + confirmation, not a dedicated route
+    backend:
+      path: /recipes/{id}
+      method: DELETE # Actually remove the recipe from the database

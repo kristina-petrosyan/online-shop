@@ -1,0 +1,158 @@
+{
+  "Features": {
+    "UI-Style": "Clear, simple, Modern, and Minimalistic",
+    "Style-Organization": "Cascade Layers Way",
+    "Interactive": {
+      "Method": "Native HTML5 & CSS3 Only — No JavaScript",
+      "Core-Attributes": {
+        "command": ["show-modal", "close", "request-close", "toggle-popover", "show-popover", "hide-popover"],
+        "commandfor": "Links invoker <button> to target element's ID",
+        "popover": ["auto", "manual", "hint"]
+      },
+      "Components": {
+        "Modals": {
+          "Element": "<dialog>",
+          "Trigger": "<button command='show-modal' commandfor='...'>",
+          "Dismiss": "<button command='close' commandfor='...'>",
+          "Backdrop": "::backdrop pseudo-element",
+          "Entry-Exit-Animation": "@starting-style + transition + transition-behavior: allow-discrete",
+          "Focus-Handling": "Native browser-managed focus trap"
+        },
+        "Popups": {
+          "Element": "Any element with [popover]",
+          "Trigger": "<button command='toggle-popover' commandfor='...'>",
+          "Dismiss": "Light-dismiss (auto mode) or command='hide-popover'",
+          "Backdrop": "::backdrop (auto popovers only)",
+          "Entry-Exit-Animation": "@starting-style + transition-behavior: allow-discrete",
+          "Positioning": "CSS Anchor Positioning"
+        },
+        "Dropdowns": {
+          "Element": "[popover='auto'] anchored to invoker",
+          "Trigger": "<button command='toggle-popover' commandfor='...' anchor-name='...'>",
+          "Positioning": "CSS Anchor Positioning",
+          "Behavior": "Light-dismiss on outside click / Escape (native)"
+        }
+      },
+      "Anchor-Positioning": {
+        "Anchor-Declaration": "anchor-name (on trigger element)",
+        "Anchor-Reference": "position-anchor (on positioned element)",
+        "Positioning-Property": "position: absolute + position-area",
+        "Fallbacks": "@position-try / position-try-fallbacks",
+        "Sizing": "anchor-size() function for width/height matching",
+        "Offset-Control": "anchor() function for fine-tuned inset values"
+      },
+      "Progressive-Enhancement": {
+        "Feature-Queries": "@supports(anchor-name: --x) for layered fallback",
+        "Fallback-Positioning": "Flexbox/Grid centering when anchor positioning unsupported"
+      }
+    }
+  },
+  "UI": {
+    "libraries": {
+      "icons": "Google Material Icons"
+    },
+    "ColorFormat": "OKLCH()",
+    "Color-Mode": "Dark",
+    "Colors": [
+      {
+        "Color": "#0081a7",
+        "priority": "primary"
+      },
+      {
+        "Color": "#f07167",
+        "priority": "primary"
+      },
+      {
+        "Color": "#00afb9",
+        "priority": "secondary"
+      },
+      {
+        "Color": "#fed9b7",
+        "priority": "tertiary"
+      }
+    ]
+  },
+  "Layout": {
+    "Building-Repositories": [
+      {
+        "Repository": "Pages",
+        "content": ["HomePage.tsx"]
+      },
+      {
+        "Repository": "partials",
+        "content": ["FooterPartial.tsx"]
+      },
+      {
+        "Repository": "Blocks",
+        "content": ["HeaderBlock.tsx"]
+      },
+      {
+        "Repository": "Components",
+        "content": ["RecipeComponent.tsx"]
+      }
+    ],
+    "Building": "Flex Box",
+    "Breakpoints": {
+      "Strategy": "Mobile-First (min-width)",
+      "Implementation": "CSS Custom Media Queries (@custom-media) inside dedicated Cascade Layer",
+      "Sizes": {
+        "sm": "40rem",
+        "md": "48rem",
+        "lg": "64rem",
+        "xl": "80rem",
+        "2xl": "96rem"
+      },
+      "Pixel-Reference": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1536px"
+      },
+      "Usage-Pattern": "@media (min-width: var(--breakpoint-*)) scoped per component, not global overrides"
+    },
+    "Spacing": {
+      "Strategy": "Fluid Type Scale (rem-based, 4px increment)",
+      "Implementation": "CSS Custom Properties (--space-*) inside dedicated Cascade Layer (tokens)",
+      "Sizes": {
+        "3xs": "0.25rem",
+        "2xs": "0.5rem",
+        "xs": "0.75rem",
+        "sm": "1rem",
+        "md": "1.5rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "2xl": "4rem",
+        "3xl": "6rem",
+        "4xl": "8rem"
+      },
+      "Pixel-Reference": {
+        "3xs": "4px",
+        "2xs": "8px",
+        "xs": "12px",
+        "sm": "16px",
+        "md": "24px",
+        "lg": "32px",
+        "xl": "48px",
+        "2xl": "64px",
+        "3xl": "96px",
+        "4xl": "128px"
+      },
+      "Usage": {
+        "gap": "var(--space-*) for flex/grid child spacing",
+        "padding": "var(--space-*) for internal component spacing",
+        "margin": "var(--space-*) for external/layout spacing, avoid on components — prefer gap"
+      },
+      "Fluid-Variants": {
+        "Method": "clamp() for hero/section-level spacing only",
+        "Example": "--space-fluid-lg: clamp(2rem, 5vw, 4rem)"
+      },
+      "Usage-Pattern": "Component-scoped var(--space-*) references, no hardcoded px/rem values in component layers"
+    },
+    "Container": {
+      "Max-Width": "1280px",
+      "Behavior": "width: 100%; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem)",
+      "Scope": "Applied at layout-shell level, not nested inside every component"
+    }
+  }
+}

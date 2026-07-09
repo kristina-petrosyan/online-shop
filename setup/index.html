@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Recipe Book</title>
+  </head>
+  <body>
+    <section data-layout="page">
+      <div class="container" data-layout="builder">
+        <header class="headers" data-layout="block">
+          <h2 class="section-title" data-layout="element">Recipe Book</h2>
+          <h4 class="section-subtitle" data-layout="element">Discover and manage your favorite recipes</h4>
+        </header>
+        <main data-layout="block">
+          <div class="row" data-layout="builder">
+            <div class="col" data-layout="builder" data-content="panel-aside" data-width="30%">
+              <aside data-layout="block">
+                <div class="panel-block" data-layout="block">
+                  <h3 class="panel-title" data-layout="element">Panel Title</h3>
+                  <div class="panel-content" data-layout="block">
+                    <button
+                      class="panel-button"
+                      data-layout="element"
+                      data-category="popup trigger"
+                      data-anchor="recipe-nav"
+                    >
+                      Click Me
+                    </button>
+                    <div class="drop-down" data-layout="block" data-category="popup content">
+                      <a href="#" data-layout="element" data-route="/recipes">All Recipes</a>
+                      <a href="#" data-layout="element" data-route="/recipes/create">Create Recipe</a>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+            <div class="col" data-layout="builder" data-content="panel-main" data-width="70%">
+              <div class="content" data-layout="block">
+                <div class="row" data-layout="builder">
+                  <div
+                    class="col"
+                    data-layout="builder"
+                    data-content="panel-main-content"
+                    data-width="30%"
+                  >
+                    <template data-layout="component">
+                      <div class="recipe-row" data-layout="component" data-content="Recipe Book">
+                        <div class="recipe-row-compact" data-field="summary">
+                          <img
+                            class="recipe-thumb"
+                            data-field="image"
+                            src="https://cdn.dummyjson.com/recipe-images/2.webp"
+                            alt="Vegetarian Stir-Fry"
+                          />
+                          <span class="recipe-name" data-field="name">Vegetarian Stir-Fry</span>
+                          <span class="recipe-difficulty" data-field="difficulty" data-value="Medium"
+                            >Medium</span
+                          >
+                          <span class="recipe-cuisine" data-field="cuisine">Asian</span>
+                          <span class="recipe-time" data-field="totalTime">35 min</span>
+                          <span class="recipe-calories" data-field="caloriesPerServing">250 cal</span>
+                          <span class="recipe-rating" data-field="rating"
+                            >★ 4.7
+                            <span class="recipe-review-count" data-field="reviewCount">(26)</span>
+                          </span>
+
+                          <div class="recipe-row-actions" data-field="actions">
+                            <button class="btn-view" data-action="view" data-recipe-id="2">View</button>
+                            <button class="btn-edit" data-action="edit" data-recipe-id="2">Edit</button>
+                            <button class="btn-delete" data-action="delete" data-recipe-id="2">
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+
+                        <details class="recipe-details" data-field="details">
+                          <summary class="recipe-details-toggle">Ingredients &amp; instructions</summary>
+                          <div class="recipe-details-body">
+                            <ul class="recipe-ingredients" data-field="ingredients">
+                              <li data-field="ingredient">Tofu, cubed</li>
+                              <li data-field="ingredient">Broccoli florets</li>
+                            </ul>
+                            <ol class="recipe-instructions" data-field="instructions">
+                              <li data-field="instruction">
+                                In a wok, heat sesame oil over medium-high heat.
+                              </li>
+                            </ol>
+                            <div class="recipe-tags" data-field="tags">
+                              <span class="tag" data-field="tag">Vegetarian</span>
+                              <span class="tag" data-field="tag">Stir-fry</span>
+                            </div>
+                            <div class="recipe-meal-type" data-field="mealType">
+                              <span class="tag" data-field="meal">Lunch</span>
+                            </div>
+                          </div>
+                        </details>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>
