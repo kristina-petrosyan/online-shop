@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { Loader2, Save, X } from "lucide-react";
 import type { MealType, Recipe, RecipeDifficulty } from "../types/recipe.types";
 import type { RecipeInput } from "../api/recipes";
 
@@ -169,9 +170,15 @@ function RecipeForm({ initialValues, submitLabel, onSubmit, onCancel }: RecipeFo
 
       <div className="form-actions" data-layout="element">
         <button type="submit" className="btn-view" disabled={submitting}>
+          {submitting ? (
+            <Loader2 className="icon icon-spin" size={14} aria-hidden="true" />
+          ) : (
+            <Save className="icon" size={14} aria-hidden="true" />
+          )}
           {submitting ? "Saving…" : submitLabel}
         </button>
         <button type="button" className="btn-delete" onClick={onCancel} disabled={submitting}>
+          <X className="icon" size={14} aria-hidden="true" />
           Cancel
         </button>
       </div>

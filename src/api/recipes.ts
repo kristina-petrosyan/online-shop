@@ -2,7 +2,7 @@ import type { Recipe } from "../types/recipe.types";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
-interface RecipesResponse {
+export interface RecipesResponse {
   recipes: Recipe[];
   total: number;
   skip: number;
@@ -16,6 +16,12 @@ export async function fetchRecipes(): Promise<Recipe[]> {
   if (!res.ok) throw new Error("Failed to load recipes");
   const data: RecipesResponse = await res.json();
   return data.recipes;
+}
+
+export async function fetchRecipesPage(skip: number, limit: number): Promise<RecipesResponse> {
+  const res = await fetch(`${API_URL}/recipes?skip=${skip}&limit=${limit}`);
+  if (!res.ok) throw new Error("Failed to load recipes");
+  return res.json();
 }
 
 export async function fetchRecipe(id: number): Promise<Recipe> {

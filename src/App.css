@@ -60,7 +60,8 @@
     --clr-success: var(--clr-secondary);
     --clr-muted: var(--clr-text-muted);
 
-    --shadow: oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
+    --shadow:
+      oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
 
     /* spacing scale (4px increment) */
     --space-3xs: 0.25rem;
@@ -97,7 +98,7 @@
   }
 
   body {
-    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
     background: var(--clr-bg);
     color: var(--clr-text);
     line-height: 1.5;
@@ -114,13 +115,13 @@
 
 /* ---------- layout ---------- */
 @layer layout {
-  [data-layout='page'] {
+  [data-layout="page"] {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
   }
 
-  [data-layout='builder'].container {
+  [data-layout="builder"].container {
     width: 100%;
     max-width: 1280px;
     margin-inline: auto;
@@ -132,7 +133,7 @@
     gap: var(--space-lg);
   }
 
-  [data-layout='builder'].row {
+  [data-layout="builder"].row {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
@@ -143,14 +144,14 @@
     }
   }
 
-  [data-layout='builder'].col {
+  [data-layout="builder"].col {
     width: 100%;
 
     @media (--lg) {
-      &[data-width='30%'] {
+      &[data-width="30%"] {
         flex: 0 0 30%;
       }
-      &[data-width='70%'] {
+      &[data-width="70%"] {
         flex: 1 1 70%;
       }
     }
@@ -168,7 +169,14 @@
   }
 
   .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
     font-size: 1.75rem;
+  }
+
+  .section-title .icon {
+    color: var(--clr-primary);
   }
 
   .section-subtitle {
@@ -189,6 +197,9 @@
   }
 
   .panel-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
     font-size: 1.1rem;
   }
 
@@ -201,6 +212,9 @@
   .panel-button {
     anchor-name: --recipe-nav;
     align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
     padding: var(--space-2xs) var(--space-sm);
     border-radius: 8px;
     background: var(--clr-primary);
@@ -214,12 +228,12 @@
   }
 
   @position-try --recipe-nav-flip {
-    position-area: block-start inline-start;
+    position-area: block-start center;
   }
 
   .drop-down {
     position-anchor: --recipe-nav;
-    position-area: block-end inline-start;
+    position-area: block-end center;
     position-try-fallbacks: --recipe-nav-flip;
     margin-top: var(--space-2xs);
 
@@ -247,6 +261,9 @@
     }
 
     a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
       padding: var(--space-2xs) var(--space-xs);
       border-radius: 6px;
       text-decoration: none;
@@ -301,6 +318,13 @@
     font-size: 0.875rem;
     text-align: center;
   }
+
+  .site-footer p {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xs);
+  }
 }
 
 /* ---------- components ---------- */
@@ -314,13 +338,13 @@
     border-radius: 12px;
     padding: var(--space-sm) var(--space-md);
 
-    &:has(.recipe-difficulty[data-value='Hard']) {
+    &:has(.recipe-difficulty[data-value="Hard"]) {
       border-left-color: var(--clr-danger);
     }
-    &:has(.recipe-difficulty[data-value='Medium']) {
+    &:has(.recipe-difficulty[data-value="Medium"]) {
       border-left-color: var(--clr-warning);
     }
-    &:has(.recipe-difficulty[data-value='Easy']) {
+    &:has(.recipe-difficulty[data-value="Easy"]) {
       border-left-color: var(--clr-success);
     }
   }
@@ -355,13 +379,13 @@
     color: var(--clr-text-muted);
   }
 
-  .recipe-difficulty[data-value='Easy'] {
+  .recipe-difficulty[data-value="Easy"] {
     color: var(--clr-success);
   }
-  .recipe-difficulty[data-value='Medium'] {
+  .recipe-difficulty[data-value="Medium"] {
     color: var(--clr-warning);
   }
-  .recipe-difficulty[data-value='Hard'] {
+  .recipe-difficulty[data-value="Hard"] {
     color: var(--clr-danger);
   }
 
@@ -369,9 +393,16 @@
   .recipe-time,
   .recipe-calories,
   .recipe-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
     font-size: 0.8rem;
     color: var(--clr-text-muted);
     white-space: nowrap;
+  }
+
+  .recipe-rating .icon {
+    color: var(--clr-warning);
   }
 
   .recipe-review-count {
@@ -396,6 +427,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    gap: var(--space-3xs);
 
     &:hover {
       background: var(--clr-border);
@@ -411,12 +443,66 @@
     color: var(--clr-danger);
   }
 
-  [data-state='loading'] {
+  [data-state="loading"],
+  [data-state="error"] {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  [data-state="loading"] {
     color: var(--clr-text-muted);
   }
 
-  [data-state='error'] {
+  [data-state="error"] {
     color: var(--clr-danger);
+  }
+
+  [data-state="pagination"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-top: var(--space-md);
+
+    span {
+      font-size: 0.8rem;
+      color: var(--clr-text-muted);
+      padding: 0 var(--space-3xs);
+    }
+
+    button {
+      min-width: 2rem;
+      padding: var(--space-3xs) var(--space-sm);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--clr-surface-2);
+      color: var(--clr-text);
+
+      &:hover:not(:disabled) {
+        background: var(--clr-border);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      &[aria-current="page"] {
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+        opacity: 1;
+        cursor: default;
+      }
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .recipe-details {
@@ -424,6 +510,9 @@
   }
 
   .recipe-details-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
     font-size: 0.8rem;
     color: var(--clr-text-muted);
     cursor: pointer;
@@ -488,7 +577,7 @@
     gap: var(--space-3xs);
     font-size: 0.875rem;
     color: var(--clr-text-muted);
-    flex: 1 1 160px;
+    flex: 1 1 60px;
   }
 
   .form-field input,
@@ -527,7 +616,21 @@
   }
 
   .form-actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
     padding: var(--space-2xs) var(--space-md);
     border-radius: 8px;
+  }
+}
+
+/* ---------- utilities ---------- */
+@layer utilities {
+  .icon {
+    flex-shrink: 0;
+  }
+
+  .icon-spin {
+    animation: spin 1s linear infinite;
   }
 }

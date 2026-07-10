@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { Clock, Eye, Flame, Pencil, Star, Trash2 } from 'lucide-react'
 import type { Recipe } from '../types/recipe.types'
 
 interface RecipeComponentProps {
@@ -27,15 +28,18 @@ function RecipeComponent({ recipe, onDelete }: RecipeComponentProps) {
         </span>
 
         <span className="recipe-time" data-field="totalTime">
+          <Clock className="icon" size={14} aria-hidden="true" />
           {totalTime} min
         </span>
 
         <span className="recipe-calories" data-field="caloriesPerServing">
+          <Flame className="icon" size={14} aria-hidden="true" />
           {recipe.caloriesPerServing} cal
         </span>
 
         <span className="recipe-rating" data-field="rating">
-          ★ {recipe.rating.toFixed(1)}
+          <Star className="icon" size={14} fill="currentColor" stroke="none" aria-hidden="true" />
+          {recipe.rating.toFixed(1)}
           <span className="recipe-review-count" data-field="reviewCount">
             ({recipe.reviewCount})
           </span>
@@ -43,9 +47,11 @@ function RecipeComponent({ recipe, onDelete }: RecipeComponentProps) {
 
         <div className="recipe-row-actions" data-field="actions">
           <Link className="btn-view" to={`/recipes/${recipe.id}`} data-action="view" data-recipe-id={recipe.id}>
+            <Eye className="icon" size={14} aria-hidden="true" />
             View
           </Link>
           <Link className="btn-edit" to={`/recipes/${recipe.id}/edit`} data-action="edit" data-recipe-id={recipe.id}>
+            <Pencil className="icon" size={14} aria-hidden="true" />
             Edit
           </Link>
           {onDelete && (
@@ -56,6 +62,7 @@ function RecipeComponent({ recipe, onDelete }: RecipeComponentProps) {
               data-recipe-id={recipe.id}
               onClick={() => onDelete(recipe.id)}
             >
+              <Trash2 className="icon" size={14} aria-hidden="true" />
               Delete
             </button>
           )}

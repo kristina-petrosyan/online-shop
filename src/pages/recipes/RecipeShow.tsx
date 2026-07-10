@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+import { ArrowLeft, CircleAlert, Clock, Flame, Loader2, Pencil, Star, Trash2 } from "lucide-react";
 import type { Recipe } from "../../types/recipe.types";
 import { deleteRecipe, fetchRecipe } from "../../api/recipes";
 import HeaderBlock from "../../blocks/HeaderBlock";
@@ -54,8 +55,18 @@ function RecipeShow() {
               <SidebarPartial />
             </div>
             <div className="col" data-layout="builder" data-content="panel-main" data-width="70%">
-              {loading && <p data-state="loading">Loading recipe…</p>}
-              {error && <p data-state="error">{error}</p>}
+              {loading && (
+                <p data-state="loading">
+                  <Loader2 className="icon icon-spin" size={16} aria-hidden="true" />
+                  Loading recipe…
+                </p>
+              )}
+              {error && (
+                <p data-state="error">
+                  <CircleAlert className="icon" size={16} aria-hidden="true" />
+                  {error}
+                </p>
+              )}
 
               {recipe && (
                 <div className="recipe-row" data-layout="component" data-content="Recipe Book">
@@ -75,15 +86,18 @@ function RecipeShow() {
                     </span>
 
                     <span className="recipe-time" data-field="totalTime">
+                      <Clock className="icon" size={14} aria-hidden="true" />
                       {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
                     </span>
 
                     <span className="recipe-calories" data-field="caloriesPerServing">
+                      <Flame className="icon" size={14} aria-hidden="true" />
                       {recipe.caloriesPerServing} cal
                     </span>
 
                     <span className="recipe-rating" data-field="rating">
-                      ★ {recipe.rating.toFixed(1)}
+                      <Star className="icon" size={14} fill="currentColor" stroke="none" aria-hidden="true" />
+                      {recipe.rating.toFixed(1)}
                       <span className="recipe-review-count" data-field="reviewCount">
                         ({recipe.reviewCount})
                       </span>
@@ -91,12 +105,15 @@ function RecipeShow() {
 
                     <div className="recipe-row-actions" data-field="actions">
                       <Link className="btn-view" to="/recipes" data-action="back">
+                        <ArrowLeft className="icon" size={14} aria-hidden="true" />
                         Back
                       </Link>
                       <Link className="btn-edit" to={`/recipes/${recipe.id}/edit`} data-action="edit">
+                        <Pencil className="icon" size={14} aria-hidden="true" />
                         Edit
                       </Link>
                       <button type="button" className="btn-delete" data-action="delete" onClick={handleDelete}>
+                        <Trash2 className="icon" size={14} aria-hidden="true" />
                         Delete
                       </button>
                     </div>

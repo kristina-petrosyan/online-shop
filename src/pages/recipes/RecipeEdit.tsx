@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { CircleAlert, Loader2, Pencil } from "lucide-react";
 import type { Recipe } from "../../types/recipe.types";
 import { fetchRecipe, updateRecipe } from "../../api/recipes";
 import RecipeForm from "../../components/RecipeForm";
@@ -57,10 +58,21 @@ function RecipeEdit() {
             </div>
             <div className="col" data-layout="builder" data-content="panel-main" data-width="70%">
               <h3 className="panel-title" data-layout="element">
+                <Pencil className="icon" size={18} aria-hidden="true" />
                 Edit Recipe
               </h3>
-              {loading && <p data-state="loading">Loading recipe…</p>}
-              {error && <p data-state="error">{error}</p>}
+              {loading && (
+                <p data-state="loading">
+                  <Loader2 className="icon icon-spin" size={16} aria-hidden="true" />
+                  Loading recipe…
+                </p>
+              )}
+              {error && (
+                <p data-state="error">
+                  <CircleAlert className="icon" size={16} aria-hidden="true" />
+                  {error}
+                </p>
+              )}
               {recipe && (
                 <RecipeForm
                   initialValues={recipe}

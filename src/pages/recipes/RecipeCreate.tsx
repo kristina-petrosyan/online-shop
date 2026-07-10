@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { CircleAlert, Plus } from "lucide-react";
 import { createRecipe } from "../../api/recipes";
 import RecipeForm from "../../components/RecipeForm";
 import type { RecipeFormValues } from "../../components/RecipeForm";
@@ -31,9 +32,15 @@ function RecipeCreate() {
             </div>
             <div className="col" data-layout="builder" data-content="panel-main" data-width="70%">
               <h3 className="panel-title" data-layout="element">
+                <Plus className="icon" size={18} aria-hidden="true" />
                 Create Recipe
               </h3>
-              {error && <p data-state="error">{error}</p>}
+              {error && (
+                <p data-state="error">
+                  <CircleAlert className="icon" size={16} aria-hidden="true" />
+                  {error}
+                </p>
+              )}
               <RecipeForm submitLabel="Create Recipe" onSubmit={handleSubmit} onCancel={() => navigate("/recipes")} />
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CircleAlert, Loader2 } from "lucide-react";
 import type { Recipe } from "../../types/recipe.types";
 import { deleteRecipe, fetchRecipes } from "../../api/recipes";
 import HeaderBlock from "../../blocks/HeaderBlock";
@@ -54,8 +55,18 @@ function RecipeIndex() {
               <SidebarPartial />
             </div>
             <div className="col" data-layout="builder" data-content="panel-main" data-width="70%">
-              {loading && <p data-state="loading">Loading recipes…</p>}
-              {error && <p data-state="error">{error}</p>}
+              {loading && (
+                <p data-state="loading">
+                  <Loader2 className="icon icon-spin" size={16} aria-hidden="true" />
+                  Loading recipes…
+                </p>
+              )}
+              {error && (
+                <p data-state="error">
+                  <CircleAlert className="icon" size={16} aria-hidden="true" />
+                  {error}
+                </p>
+              )}
               {!loading && !error && <RecipeListBlock recipes={recipes} onDelete={handleDelete} />}
             </div>
           </div>
