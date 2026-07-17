@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 import { Loader2, Save, X } from "lucide-react";
 import type { MealType, Recipe, RecipeDifficulty } from "../types/recipe.types";
 import type { RecipeInput } from "../api/recipes";
@@ -51,7 +51,7 @@ function RecipeForm({ initialValues, submitLabel, onSubmit, onCancel }: RecipeFo
     );
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitting(true);
 

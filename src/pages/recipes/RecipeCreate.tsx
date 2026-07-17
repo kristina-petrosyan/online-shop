@@ -27,10 +27,20 @@ function RecipeCreate() {
         <HeaderBlock />
         <main data-layout="block">
           <div className="row" data-layout="builder">
-            <div className="col" data-layout="builder" data-content="panel-aside" data-width="30%">
+            <div
+              className="col"
+              data-layout="builder"
+              data-content="panel-aside"
+              data-width="30%"
+            >
               <SidebarPartial />
             </div>
-            <div className="col" data-layout="builder" data-content="panel-main" data-width="70%">
+            <div
+              className="col"
+              data-layout="builder"
+              data-content="panel-main"
+              data-width="70%"
+            >
               <h3 className="panel-title" data-layout="element">
                 <Plus className="icon" size={18} aria-hidden="true" />
                 Create Recipe
@@ -41,7 +51,11 @@ function RecipeCreate() {
                   {error}
                 </p>
               )}
-              <RecipeForm submitLabel="Create Recipe" onSubmit={handleSubmit} onCancel={() => navigate("/recipes")} />
+              <RecipeForm
+                submitLabel="Create Recipe"
+                onSubmit={handleSubmit}
+                onCancel={() => navigate("/recipes")}
+              />
             </div>
           </div>
         </main>

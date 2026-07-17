@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CircleAlert, Loader2 } from "lucide-react";
 import type { Recipe } from "../types/recipe.types";
-import { fetchRecipesPage } from "../api/recipes";
+import { recipesPaginator } from "../api/recipes";
 import HeaderBlock from "../blocks/HeaderBlock";
 import RecipeListBlock from "../blocks/RecipeListBlock";
 import SidebarPartial from "../partials/SidebarPartial";
@@ -36,7 +36,7 @@ function HomePage() {
     let cancelled = false;
     setLoading(true);
 
-    fetchRecipesPage((page - 1) * PER_PAGE, PER_PAGE)
+    recipesPaginator((page - 1) * PER_PAGE, PER_PAGE)
       .then((data) => {
         if (!cancelled) {
           setRecipes(data.recipes);
@@ -77,7 +77,11 @@ function HomePage() {
             >
               {loading && (
                 <p data-state="loading">
-                  <Loader2 className="icon icon-spin" size={16} aria-hidden="true" />
+                  <Loader2
+                    className="icon icon-spin"
+                    size={16}
+                    aria-hidden="true"
+                  />
                   Loading recipes…
                 </p>
               )}
@@ -98,22 +102,25 @@ function HomePage() {
                     >
                       Previous
                     </button>
-                    {getPageNumbers(page, totalPages).map((pageNumber, index) =>
-                      pageNumber === "…" ? (
-                        <span key={`ellipsis-${index}`} aria-hidden="true">
-                          …
-                        </span>
-                      ) : (
-                        <button
-                          key={pageNumber}
-                          type="button"
-                          onClick={() => setPage(pageNumber)}
-                          aria-current={pageNumber === page ? "page" : undefined}
-                          disabled={pageNumber === page}
-                        >
-                          {pageNumber}
-                        </button>
-                      ),
+                    {getPageNumbers(page, totalPages).map(
+                      (pageNumber, index) =>
+                        pageNumber === "…" ? (
+                          <span key={`ellipsis-${index}`} aria-hidden="true">
+                            …
+                          </span>
+                        ) : (
+                          <button
+                            key={pageNumber}
+                            type="button"
+                            onClick={() => setPage(pageNumber)}
+                            aria-current={
+                              pageNumber === page ? "page" : undefined
+                            }
+                            disabled={pageNumber === page}
+                          >
+                            {pageNumber}
+                          </button>
+                        ),
                     )}
                     <button
                       type="button"

@@ -18,7 +18,10 @@ export async function fetchRecipes(): Promise<Recipe[]> {
   return data.recipes;
 }
 
-export async function fetchRecipesPage(skip: number, limit: number): Promise<RecipesResponse> {
+export async function recipesPaginator(
+  skip: number,
+  limit: number,
+): Promise<RecipesResponse> {
   const res = await fetch(`${API_URL}/recipes?skip=${skip}&limit=${limit}`);
   if (!res.ok) throw new Error("Failed to load recipes");
   return res.json();
@@ -40,7 +43,10 @@ export async function createRecipe(input: RecipeInput): Promise<Recipe> {
   return res.json();
 }
 
-export async function updateRecipe(id: number, input: RecipeInput): Promise<Recipe> {
+export async function updateRecipe(
+  id: number,
+  input: RecipeInput,
+): Promise<Recipe> {
   const res = await fetch(`${API_URL}/recipes/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
